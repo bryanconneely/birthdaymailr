@@ -15,6 +15,7 @@ open Newtonsoft.Json
 // open Microsoft.Azure.WebJobs.Host
 // open System.Threading.Tasks
 
+GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.ContractResolver <- Newtonsoft.Json.Serialization.DefaultContractResolver()
 
 type Named = {
     name: string
