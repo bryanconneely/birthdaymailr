@@ -1,22 +1,10 @@
 #r "System.Net.Http"
 #r "Newtonsoft.Json"
-//#r "../packages/Newtonsoft.Json/lib/net45/Newtonsoft.Json.dll"
 
 open System.Net
 open System.Net.Http
 open Newtonsoft.Json
-
-// open System
-// open System.Collections.Generic
-// open System.Linq
-// open System.Web
-// open System.Net
-// open System.Net.Http
-// open Microsoft.Azure.WebJobs.Host
-// open System.Threading.Tasks
-
-GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.ContractResolver <- Newtonsoft.Json.Serialization.DefaultContractResolver()
-
+ 
 type Named = {
     name: string
 }
@@ -93,28 +81,28 @@ let Run(req: HttpRequestMessage, log: TraceWriter) =
                                         
         sb.Append (sprintf "\n")|> ignore
                                         
-        let pplage = people |> List.sortBy (fun person -> System.DateTime.Parse (snd person))
-        pplage |> List.iter (fun person ->  let newp = ((fst person), (calcyears (snd person)), (calcmonths (snd person)))
-                                            match newp with 
-                                            | n,0,m -> sb.Append (sprintf "%s is just %d months old\n" n m)|> ignore
-                                            | n,y,0 -> sb.Append (sprintf "%s is %d years old\n" n y)|> ignore
-                                            | n,y,1 -> sb.Append (sprintf "%s is %d years and 1 month old\n" n y)|> ignore
-                                            | n,y,6 -> sb.Append (sprintf "%s is %d and a half\n" n y)|> ignore
-                                            | n,y,m -> sb.Append (sprintf "%s is %d years and %d months old\n" n y m)|> ignore
-                                        )
+        // let pplage = people |> List.sortBy (fun person -> System.DateTime.Parse (snd person))
+        // pplage |> List.iter (fun person ->  let newp = ((fst person), (calcyears (snd person)), (calcmonths (snd person)))
+        //                                     match newp with 
+        //                                     | n,0,m -> sb.Append (sprintf "%s is just %d months old\n" n m)|> ignore
+        //                                     | n,y,0 -> sb.Append (sprintf "%s is %d years old\n" n y)|> ignore
+        //                                     | n,y,1 -> sb.Append (sprintf "%s is %d years and 1 month old\n" n y)|> ignore
+        //                                     | n,y,6 -> sb.Append (sprintf "%s is %d and a half\n" n y)|> ignore
+        //                                     | n,y,m -> sb.Append (sprintf "%s is %d years and %d months old\n" n y m)|> ignore
+        //                                 )
             
 
         
-        let oldest = pplage
-                        |> List.head
+        // let oldest = pplage
+        //                 |> List.head
         
-        let youngest = pplage
-                        |> List.rev
-                        |> List.head
+        // let youngest = pplage
+        //                 |> List.rev
+        //                 |> List.head
         
-        sb.Append (sprintf "\n") |> ignore
-        sb.Append (sprintf "%s is the oldest\n" (fst oldest))|> ignore
-        sb.Append (sprintf "%s is the youngest\n" (fst youngest))|> ignore
+        // sb.Append (sprintf "\n") |> ignore
+        // sb.Append (sprintf "%s is the oldest\n" (fst oldest))|> ignore
+        // sb.Append (sprintf "%s is the youngest\n" (fst youngest))|> ignore
 
         log.Info (sb.ToString())
         return req.CreateResponse(HttpStatusCode.OK, sb.ToString());
